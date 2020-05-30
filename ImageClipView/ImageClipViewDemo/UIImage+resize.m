@@ -263,12 +263,12 @@ UIImage *fixOrientation(UIImage *aImage)
     CGContextScaleCTM(context, 1.0, -1.0);
     CGContextSetBlendMode(context, kCGBlendModeNormal);
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-CGContextClipToMask(context, rect, self.CGImage);
-[color setFill];
-CGContextFillRect(context, rect);
-    UIImage*newImage = UIGraphicsGetImageFromCurrentImageContext();
+    CGContextClipToMask(context, rect, self.CGImage);
+    [color setFill];
+    CGContextFillRect(context, rect);
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-return newImage;
+ return newImage;
 }
 
 @end

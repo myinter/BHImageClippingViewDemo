@@ -39,6 +39,8 @@
         [self adjustForFringeScreen];
     }
     
+    _imageClippingView.minSize = CGSizeMake(50, 50);
+    
     //侦听引用进入后台的消息
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -167,7 +169,6 @@
 -(void)appEnterBackground
 {
     //应用进入后台
-    
 }
 
 -(void)appEnterForeground

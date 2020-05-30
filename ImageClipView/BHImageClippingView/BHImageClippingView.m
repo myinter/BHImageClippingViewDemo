@@ -93,7 +93,7 @@ typedef void(^BHImageOutputBlock)(UIImage *image);
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [super touchesBegan:touches withEvent:event];
+//    [super touchesBegan:touches withEvent:event];
     printf("touch began");
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
@@ -174,7 +174,7 @@ typedef void(^BHImageOutputBlock)(UIImage *image);
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [super touchesMoved:touches withEvent:event];
+//    [super touchesMoved:touches withEvent:event];
     
     if (!_isMoving) {
         return;
@@ -193,12 +193,6 @@ typedef void(^BHImageOutputBlock)(UIImage *image);
     if (CGPointEqualToPoint(self->_touchBeganPoint,CGPointZero)) {
         self->_touchBeganPoint = point;
         return;
-    }
-    
-    if (self->_minSize.width > 0 && self->_minSize.height > 0) {
-        if (blockClipGridOriginFrame.size.height <= self->_minSize.height || blockClipGridOriginFrame.size.width <= self->_minSize.width) {
-            return;
-        }
     }
     
     CGFloat top = blockClipGridOriginFrame.origin.y;
@@ -220,6 +214,7 @@ typedef void(^BHImageOutputBlock)(UIImage *image);
     CGFloat moveOffsetXOri = moveOffsetX;
     
     CGRect clipRect = self->_clipGridView.clipRect;
+    
     
     if (blockWidthHeightRatioConstraint != 0.0) {
         
@@ -492,6 +487,12 @@ typedef void(^BHImageOutputBlock)(UIImage *image);
     
     height = ABS(bottom - top);
     width = ABS(right - left);
+    
+    if (self->_minSize.width > 0 && self->_minSize.height > 0) {
+        height = MAX(_minSize.height, height);
+        width = MAX(_minSize.width, width);
+    }
+
     CGFloat x = MIN(left, right);
     CGFloat y = MIN(top,bottom);
     
@@ -514,7 +515,7 @@ typedef void(^BHImageOutputBlock)(UIImage *image);
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [super touchesEnded:touches withEvent:event];
+//    [super touchesEnded:touches withEvent:event];
     _isMoving = NO;
     _touchBeganPoint = CGPointZero;
     _touchMoveCount = 0;
